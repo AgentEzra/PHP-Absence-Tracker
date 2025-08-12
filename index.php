@@ -39,15 +39,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     <h1>Login</h1>
 
     <form method="post">
-        <label for="username">Nama</label>
-        <input type="text" name="username" id="username" placeholder="Nama">
+        <label for="username">Username</label>
+        <input type="text" name="username" id="username" placeholder="Name">
 
         <label for="password">Password</label>
-        <input type="number" name="password" id="password" placeholder="Password">
+        <input type="password" name="password" id="password" placeholder="Password">
 
         <a href="./login/forgotPassword.php">Forgot your password?</a>
 
-        <button>LOGIN</button>
+        <button>Login</button>
         
         <p>Don't Have An Account?
         <a href="./login/registerAccount.php">Register</a></p>

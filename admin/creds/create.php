@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Panel</title>
-    <link rel="stylesheet" href="./login/styleLogin.css">
+    <link rel="stylesheet" href="../styleAdmin.css">
 </head>
 <body>
     <h1>Administrator</h1>
