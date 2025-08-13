@@ -4,6 +4,9 @@ include '../config/connect.php';
 $username = '';
 $email = '';
 $password = '';
+$nama = '';
+$kelas = '';
+$jurusan = '';
 
 $error = '';
 $success = '';
@@ -12,9 +15,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     $username = $_POST['username'];
     $email = $_POST['email'];
     $password = $_POST['password'];
+    $fullName = $_POST['fullname'];
+    $grade = $_POST['grade'];
+    $major = $_POST['major'];
 
     try {
-        $query = "INSERT INTO absence_table_creds (nama, email, password) VALUES ('$username', '$email', '$password')";
+        $query = "INSERT INTO absence_table_creds (username, email, password, nama, kelas, jurusan) 
+        VALUES ('$username', '$email', '$password', '$fullName', '$grade', '$major')";
+
         $result = mysqli_query($connect, $query);
 
         $success = 'Berhasil Login';
@@ -42,16 +50,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     <h1>Administrator</h1>
 
     <form method="post">
-        <label for="username">Nama</label>
-        <input type="text" name="username" id="username" placeholder="Nama">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" placeholder="Username">
 
         <label for="email">Email</label>
-        <input type="text" name="email" id="email" placeholder="Email">
+        <input type="email" id="email" name="email" placeholder="Email">
 
         <label for="password">Password</label>
-        <input type="number" name="password" id="password" placeholder="Password">
+        <input type="password" id="password" name="password" placeholder="Password">
 
-        <button>Create User</button>
+        <label for="fullname">Full Name</label>
+        <input type="text" name="fullname" id="fullname" placeholder="fullname">
+
+        <label for="grade">Grade</label>
+        <select name="grade" id="grade">
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+        </select>
+
+        <label for="major">Major</label>
+        <select name="major" id="major">
+            <option value="rpl">RPL</option>
+            <option value="dkv">DKV</option>
+            <option value="akl">AKL</option>
+            <option value="mp">MP</option>
+            <option value="br">BR</option>
+        </select>
+
+        <button>Register</button>
     </form>
 
     <a href="./read.php">Kembali Ke Main?</a>

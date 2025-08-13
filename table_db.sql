@@ -1,9 +1,10 @@
 CREATE TABLE absence_table_abs (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    user_id INT NOT NULL,
+    nama VARCHAR(50) NOT NULL,
+    kelas INT NOT NULL,
+    jurusan VARCHAR(50) NOT NULL,
     waktu TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     keterangan VARCHAR(50) NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
 

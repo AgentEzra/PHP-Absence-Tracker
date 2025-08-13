@@ -22,6 +22,9 @@ $result = mysqli_query($connect, $query);
             <th>USERNAME</th>
             <th>EMAIL</th>
             <th>PASSWORD</th>
+            <th>NAMA</th>
+            <th>KELAS</th>
+            <th>JURUSAN</th>
             <th>EDIT</th>
             <th>DELETE</th>
         </tr>
@@ -31,9 +34,12 @@ $result = mysqli_query($connect, $query);
         while ($data = mysqli_fetch_assoc($result)): $i++;?>
         <tr>
             <td><?=$i; ?></td>
-            <td><?=$data['nama']; ?></td>
+            <td><?=$data['username']; ?></td>
             <td><?=$data['email']; ?></td>
             <td><?=$data['password']; ?></td>
+            <td><?=$data['nama']; ?></td>
+            <td><?=$data['kelas']; ?></td>
+            <td><?=$data['jurusan']; ?></td>
 
             <td><a href="./update.php?id= <?=$data['id']; ?>">Edit</a></td>
             <td><a href="./delete.php?id= <?=$data['id']; ?>">Delete</a></td>

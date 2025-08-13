@@ -4,6 +4,9 @@ include '../config/connect.php';
 $username = '';
 $email = '';
 $password = '';
+$nama = '';
+$kelas = '';
+$jurusan = '';
 
 $error = '';
 $success = '';
@@ -18,9 +21,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     $username = $_POST['username'];
     $email = $_POST['email'];
     $password = $_POST['password'];
+    $fullName = $_POST['fullname'];
+    $grade = $_POST['grade'];
+    $major = $_POST['major'];
 
     try {
-        $postQuery = "UPDATE absence_table_creds SET nama = '$username', email = '$email', password = '$password' WHERE id = '$id'";
+        $postQuery = "UPDATE absence_table_creds SET username = '$username', email = '$email', password = '$password', 
+        nama = '$fullName', kelas = '$grade', jurusan = '$major' WHERE id = '$id'";
+
         $postResult = mysqli_query($connect, $postQuery);
         $success = 'Berhasil update data';
     }
@@ -44,14 +52,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     <h1>Administrator</h1>
 
     <form method="post">
-        <label for="username">Nama</label>
-        <input type="text" name="username" id="username" value="<?=$data['nama'] ?>" placeholder="Nama">
+        <label for="username">Username</label>
+        <input type="text" name="username" id="username" value="<?=$data['username'] ?>" placeholder="Nama">
 
         <label for="email">Email</label>
         <input type="text" name="email" id="email" value="<?=$data['email'] ?>" placeholder="Email">
 
         <label for="password">Password</label>
         <input type="number" name="password" id="password" value="<?=$data['password'] ?>" placeholder="Password">
+
+        <label for="fullname">Full Name</label>
+        <input type="text" name="fullname" id="fullname" value="<?=$data['nama']; ?>" placeholder="fullname">
+
+        <label for="grade">Grade</label>
+        <select name="grade" id="grade">
+            <option value="10" <?=$data['kelas'] == '10' ? 'selected' : '' ?>>10</option>
+            <option value="11" <?=$data['kelas'] == '11' ? 'selected' : '' ?>>11</option>
+            <option value="12" <?=$data['kelas'] == '12' ? 'selected' : '' ?>>12</option>
+        </select>
+
+        <label for="major">Major</label>
+        <select name="major" id="major">
+            <option value="rpl" <?=$data['jurusan'] == 'RPL' ? 'selected' : '' ?>>RPL</option>
+            <option value="dkv" <?=$data['jurusan'] == 'DKV' ? 'selected' : '' ?>>DKV</option>
+            <option value="akl" <?=$data['jurusan'] == 'AKL' ? 'selected' : '' ?>>AKL</option>
+            <option value="mp" <?=$data['jurusan'] == 'MP' ? 'selected' : '' ?>>MP</option>
+            <option value="br" <?=$data['jurusan'] == 'BR' ? 'selected' : '' ?>>BR</option>
+        </select>
 
         <button>Edit User</button>
     </form>
