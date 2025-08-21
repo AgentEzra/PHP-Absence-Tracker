@@ -1,10 +1,10 @@
 CREATE TABLE absence_table_abs (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    nama VARCHAR(50) NOT NULL,
+    user_id VARCHAR(50) NOT NULL,
     kelas INT NOT NULL,
     jurusan VARCHAR(50) NOT NULL,
     waktu TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    keterangan VARCHAR(50) NOT NULL,
+    keterangan VARCHAR(50) NOT NULL
 );
 
 

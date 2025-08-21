@@ -31,6 +31,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
 
         $postResult = mysqli_query($connect, $postQuery);
         $success = 'Berhasil update data';
+
+        $query = "SELECT * FROM absence_table_creds WHERE id = '$id'";
+        $result = mysqli_query($connect, $query);
+        $data = mysqli_fetch_assoc($result);
     }
     catch (mysqli_sql_exception $e){
         $error = 'Terjadi suatu kesalahan';

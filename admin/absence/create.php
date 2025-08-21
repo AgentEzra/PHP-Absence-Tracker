@@ -2,6 +2,8 @@
 include '../config/connect.php';
 
 $userID = '';
+$kelas = '';
+$jurusan = '';
 $waktu = '';
 $keterangan = '';
 
@@ -10,16 +12,15 @@ $success = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     $userID = $_POST['userid'];
+    $kelas = $_POST['kelas'];
+    $jurusan = $_POST['jurusan']; 
     $waktu = date('Y-m-d H:i:s');
     $keterangan = $_POST['keterangan'];
 
     try {
-        $id = $_GET['id'];
-        $queryGet = "SELECT * FROM absence_table_creds WHERE id = '$id'";
-        $resultGet = mysqli_query($connect, $queryGet);
-        $dataGet = mysqli_fetch_assoc($resultGet);
+        $query = "INSERT INTO absence_table_abs (user_id, kelas, jurusan, waktu, keterangan) 
+        VALUES ('$userID', '$kelas', '$jurusan', '$waktu', '$keterangan')";
 
-        $query = "INSERT INTO absence_table_abs (nama, email, password) VALUES ('$username', '$email', '$password')";
         $result = mysqli_query($connect, $query);
 
         $success = 'Berhasil Login';
@@ -48,8 +49,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
 
     <form method="post">
         <label for="userid">Name</label>
-        <input type="text" name="userid" id="userid" placeholder="User ID">
+        <input type="text" name="userid" id="userid" placeholder="User">
 
+        <label for="kelas">Grade</label>
+        <select name="kelas" id="kelas">
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+        </select>
+
+        <label for="jurusan">Major</label>
+        <select name="jurusan" id="jurusan">
+            <option value="rpl">RPL</option>
+            <option value="dkv">DKV</option>
+            <option value="akl">AKL</option>
+            <option value="mp">MP</option>
+            <option value="br">BR</option>
+        </select>
+
+        <label for="keterangan">Status</label>
         <select name="keterangan" id="keterangan">
             <option value="Hadir">Present</option>
             <option value="Sakit">Sick</option>
