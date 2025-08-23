@@ -12,8 +12,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     $password = $_POST['password'];
 
     try {
-        $query = "SELECT * FROM absence_table_creds WHERE (username = ? OR email = ?) AND password = ? LIMIT 1;";
-        $result = mysqli_query($connect, $query);
+        $query = "SELECT * FROM absence_table_creds WHERE (username = ? OR email = ?) AND password = ?";
+        $result = mysqli_prepare($connect, $query);
 
         $success = 'Login Berhasil';
 

@@ -46,7 +46,7 @@
       <ul class="navbar-nav">
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="profile.jpg" alt="Profile" width="25" height="25" class="rounded-circle"> User
+            <img src="./image/dias.jpg" alt="Profile" width="25" height="25" class="rounded-circle"> User
           </a>
           <ul class="dropdown-menu dropdown-menu-end">
             <li><a class="dropdown-item" href="./pages/profile.php">Profile</a></li>
