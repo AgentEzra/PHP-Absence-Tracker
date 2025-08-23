@@ -1,7 +1,6 @@
 <?php
 
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,12 +12,9 @@
 <body>
     <form method="post">
         <h1>Forgot Password</h1>
-
-        <input type="text" placeholder="Email">
-        <button>Send My Password</button>
-
+        <input type="text" name="email" placeholder="Email" required>
+        <button type="submit">Send My Password</button>
         <p>Already Have An Account? <a href="../index.php">Login</a></p>
-
         <p>Don't Have An Account? <a href="./registerAccount.php">Register</a></p>
     </form>
 </body>

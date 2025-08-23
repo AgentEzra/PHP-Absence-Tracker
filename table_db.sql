@@ -17,3 +17,8 @@ CREATE TABLE absence_table_creds(
     kelas VARCHAR(50) NOT NULL,
     jurusan VARCHAR(50) NOT NULL
 );
+
+ALTER TABLE absence_table_creds
+ADD COLUMN reset_token VARCHAR(255) DEFAULT NULL,
+ADD COLUMN token_expiry DATETIME DEFAULT NULL;
+

@@ -1,7 +1,6 @@
 <?php
 
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,11 +12,9 @@
 <body>
     <form method="post">
         <h1>Password Reset</h1>
-
-        <input type="password" placeholder="New Password">
-        <input type="password" placeholder="Confirm Password">
-
-        <button>Reset My Password</button>
+        <input type="password" name="password" placeholder="New Password" required>
+        <input type="password" name="confirm" placeholder="Confirm Password" required>
+        <button type="submit">Reset My Password</button>
     </form>
 </body>
 </html>

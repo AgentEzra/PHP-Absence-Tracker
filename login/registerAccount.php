@@ -1,4 +1,40 @@
 <?php
+include '../admin/config/connect.php';
+
+$username = '';
+$email = '';
+$password = '';
+$nama = '';
+$kelas = '';
+$jurusan = '';
+
+$error = '';
+$success = '';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST'){
+    $username = $_POST['username'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $fullName = $_POST['fullname'];
+    $grade = $_POST['grade'];
+    $major = $_POST['major'];
+
+    try {
+        $query = "INSERT INTO absence_table_creds (username, email, password, nama, kelas, jurusan) 
+        VALUES ('$username', '$email', '$password', '$fullName', '$grade', '$major')";
+
+        $result = mysqli_query($connect, $query);
+
+        $success = 'Berhasil Login';
+    }
+    catch (mysqli_sql_exception $e){
+        if (str_contains($e->getMessage(), 'Duplicate entry')) {
+                $error = 'Username atau Email sudah digunakan.';
+            } else {
+                $error = 'Error: ' . $e->getMessage();
+        }
+    }
+}
 
 ?>
 
