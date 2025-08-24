@@ -1,4 +1,5 @@
 <?php
+session_start();
 include './admin/config/connect.php';
 
 $username = '';
@@ -11,20 +12,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    try {
-        $query = "SELECT * FROM absence_table_creds WHERE (username = ? OR email = ?) AND password = ?";
-        $result = mysqli_prepare($connect, $query);
+    // Query dengan prepared statement
+    $query = "SELECT * FROM absence_table_creds WHERE (username = ? OR email = ?) AND password = ? LIMIT 1";
+    $stmt = mysqli_prepare($connect, $query);
 
-        $success = 'Login Berhasil';
+    if ($stmt) {
+        mysqli_stmt_bind_param($stmt, "sss", $username, $username, $password);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
 
-        header('location: ./dashboard.php');
-        exit();
-    }
-    catch (mysqli_error){
-        $error = 'Terjadi suatu kesalahan';
+        if ($row = mysqli_fetch_assoc($result)) {
+            // Simpan data ke session
+            $_SESSION['user_id'] = $row['id'];
+            $_SESSION['username'] = $row['username'];
+            $_SESSION['email'] = $row['email'];
+            $_SESSION['nama'] = $row['nama'];
+            $_SESSION['kelas'] = $row['kelas'];
+            $_SESSION['jurusan'] = $row['jurusan'];
+
+            $success = 'Login Berhasil';
+            header('Location: ./dashboard.php');
+            exit();
+        } else {
+            $error = 'Username/Email atau Password salah';
+        }
+
+        mysqli_stmt_close($stmt);
+    } else {
+        $error = 'Terjadi suatu kesalahan pada query';
     }
 }
-
 ?>
 
 <!DOCTYPE html>
