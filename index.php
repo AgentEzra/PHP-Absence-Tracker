@@ -1,6 +1,11 @@
 <?php
-session_start();
 include './admin/config/connect.php';
+include 'session.php';
+
+if (isLoggedIn()) {
+    header("Location: index.php");
+    exit();
+}
 
 $username = '';
 $password = '';
@@ -22,13 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
         $result = mysqli_stmt_get_result($stmt);
 
         if ($row = mysqli_fetch_assoc($result)) {
-            // Simpan data ke session
-            $_SESSION['user_id'] = $row['id'];
             $_SESSION['username'] = $row['username'];
-            $_SESSION['email'] = $row['email'];
-            $_SESSION['nama'] = $row['nama'];
-            $_SESSION['kelas'] = $row['kelas'];
-            $_SESSION['jurusan'] = $row['jurusan'];
 
             $success = 'Login Berhasil';
             header('Location: ./dashboard.php');
@@ -53,6 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     <link rel="stylesheet" href="./login/styleLogin.css">
 </head>
 <body>
+    <div class="container">
     <h1>Login</h1>
 
     <form method="post">
@@ -69,5 +69,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
         <p>Don't Have An Account?
         <a href="./login/registerAccount.php">Register</a></p>
     </form>
+    </div>
 </body>
 </html>

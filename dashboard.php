@@ -1,6 +1,11 @@
 <?php
-session_start();
-require './admin/config/connect.php';
+include './admin/config/connect.php';
+include 'session.php';
+
+if (isLoggedIn()) {
+    header("Location: index.php");
+    exit();
+}
 ?>
 
 <!DOCTYPE html>

@@ -1,6 +1,22 @@
 <?php
 session_start();
 include '../admin/config/connect.php';
+
+$query = "INSERT INTO absence_tracker_abs";
+$result = mysqli_query($connect, $query);
+
+$username = '';
+$grade = '';
+$major = '';
+$status = '';
+$waktu = '';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST'){
+  $username = $_SESSION['nama'];
+  $grade = $_SESSION[''];
+  $major = $_SESSION[''];
+  $status = $_SESSION[''];
+}
 ?>
 
 <!DOCTYPE html>
@@ -62,7 +78,7 @@ include '../admin/config/connect.php';
 </nav>
 
 
-<h1>Administrator</h1>
+<h1>Request Absence</h1>
 
     <form method="post">
         <label for="userid">Name</label>

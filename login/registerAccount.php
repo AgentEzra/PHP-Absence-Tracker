@@ -1,5 +1,11 @@
 <?php
 include '../admin/config/connect.php';
+include '../session.php';
+
+if (isLoggedIn()) {
+    header("Location: ../index.php");
+    exit();
+}
 
 $username = '';
 $email = '';
@@ -20,8 +26,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     $major = $_POST['major'];
 
     try {
-        $query = "INSERT INTO absence_table_creds (username, email, password, nama, kelas, jurusan) 
-        VALUES ('$username', '$email', '$password', '$fullName', '$grade', '$major')";
+        $query = "INSERT INTO absence_table_creds (username, email, password, nama, kelas, jurusan, role) 
+        VALUES ('$username', '$email', '$password', '$fullName', '$grade', '$major', 'user')";
 
         $result = mysqli_query($connect, $query);
 
