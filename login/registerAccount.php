@@ -3,7 +3,7 @@ include '../admin/config/connect.php';
 include '../session.php';
 
 if (isLoggedIn()) {
-    header("Location: ../index.php");
+    header("Location: ../dashboard.php");
     exit();
 }
 
@@ -53,41 +53,62 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     <link rel="stylesheet" href="./styleLogin.css">
 </head>
 <body>
-    <form method="post">
-        <h1>Register</h1>
+    <div class="auth-box">
+        <form method="post">
 
-        <label for="username">Username</label>
-        <input type="text" id="username" name="username" placeholder="Username">
+            <h1>Register</h1>
 
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" placeholder="Email">
+            <div class="auth-part">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" placeholder="Username">
+            </div>
 
-        <label for="password">Password</label>
-        <input type="password" id="password" name="password" placeholder="Password">
+            <div class="auth-part">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Email">
+            </div>
 
-        <label for="fullname">Full Name</label>
-        <input type="text" name="fullname" id="fullname" placeholder="fullname">
+            <div class="auth-part">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Password">
+            </div>
 
-        <label for="grade">Grade</label>
-        <select name="grade" id="grade">
-            <option value="10">10</option>
-            <option value="11">11</option>
-            <option value="12">12</option>
-        </select>
+            <div class="auth-part">
+                <label for="fullname">Full Name</label>
+                <input type="text" name="fullname" id="fullname" placeholder="fullname">
+            </div>
 
-        <label for="major">Major</label>
-        <select name="major" id="major">
-            <option value="RPL">RPL</option>
-            <option value="DKV">DKV</option>
-            <option value="AKL">AKL</option>
-            <option value="MP">MP</option>
-            <option value="BR">BR</option>
-        </select>
+            <div class="auth-option">
+                <label for="grade">Grade</label>
+                <select name="grade" id="grade">
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                </select>
+            </div>
 
-        <button>Register</button>
+            <div class="auth-option">
+                <label for="major">Major</label>
+                <select name="major" id="major">
+                    <option value="RPL">RPL</option>
+                    <option value="DKV">DKV</option>
+                    <option value="AKL">AKL</option>
+                    <option value="MP">MP</option>
+                    <option value="BR">BR</option>
+                </select>
+            </div>
+        
+    
+    
+    
+            <button>Register</button>
 
-        <p>Already Have An Account?
-        <a href="../index.php">Login</a></p>
-    </form>
+            <div class="auth-link">
+                <p>Already Have An Account?
+                <a href="../index.php">Login</a></p>
+            </div>
+    
+        </form>
+    </div>
 </body>
 </html>

@@ -10,12 +10,21 @@
     <link rel="stylesheet" href="./styleLogin.css">
 </head>
 <body>
-    <form method="post">
-        <h1>Forgot Password</h1>
-        <input type="text" name="email" placeholder="Email" required>
-        <button type="submit">Send My Password</button>
-        <p>Already Have An Account? <a href="../index.php">Login</a></p>
-        <p>Don't Have An Account? <a href="./registerAccount.php">Register</a></p>
-    </form>
+    <div class="auth-box" style="position: absolute; top: 40%; left: 50%; transform: translate(-50%, -50%);">
+        <form method="post">
+            <h1>Forgot Password</h1>
+
+            <div class="auth-part">
+                <input type="text" name="email" placeholder="Email" required>
+            </div>
+
+            <button type="submit">Send My Password</button>
+
+            <div class="auth-link">
+                <p>Already Have An Account? <a href="../index.php">Login</a></p>
+                <p>Don't Have An Account? <a href="./registerAccount.php">Register</a></p>
+            </div>
+        </form>
+    </div>
 </body>
 </html>

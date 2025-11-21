@@ -3,7 +3,7 @@ include './admin/config/connect.php';
 include 'session.php';
 
 if (isLoggedIn()) {
-    header("Location: index.php");
+    header("Location: ./dashboard.php");
     exit();
 }
 ?>

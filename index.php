@@ -3,7 +3,7 @@ include './admin/config/connect.php';
 include 'session.php';
 
 if (isLoggedIn()) {
-    header("Location: index.php");
+    header("Location: dashboard.php");
     exit();
 }
 
@@ -27,7 +27,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
         $result = mysqli_stmt_get_result($stmt);
 
         if ($row = mysqli_fetch_assoc($result)) {
+            $_SESSION['user_id'] = $row['id']; // Make sure to set user_id
             $_SESSION['username'] = $row['username'];
+            $_SESSION['role'] = $row['role'];
 
             $success = 'Login Berhasil';
             header('Location: ./dashboard.php');
@@ -40,6 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     } else {
         $error = 'Terjadi suatu kesalahan pada query';
     }
+    exit();
 }
 ?>
 
@@ -52,22 +55,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     <link rel="stylesheet" href="./login/styleLogin.css">
 </head>
 <body>
-    <div class="container">
+    <div class="auth-box">
     <h1>Login</h1>
 
     <form method="post">
-        <label for="username">Username</label>
-        <input type="text" name="username" id="username" placeholder="Name">
+        <div class="auth-part">
+            <label for="username">Username</label>
+            <input type="text" name="username" id="username" placeholder="Name">
+        </div>
 
-        <label for="password">Password</label>
-        <input type="password" name="password" id="password" placeholder="Password">
+        <div class="auth-part">
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password" placeholder="Password">
+            <a href="./login/forgotPassword.php">Forgot your password?</a>
+        </div>
 
-        <a href="./login/forgotPassword.php">Forgot your password?</a>
-
-        <button>Login</button>
+        <div class="auth-button">
+            <button>Login</button>
+        </div>
         
-        <p>Don't Have An Account?
-        <a href="./login/registerAccount.php">Register</a></p>
+        <div class="auth-link">
+            <p>Don't Have An Account?
+            <a href="./login/registerAccount.php">Register</a></p>
+        </div>
     </form>
     </div>
 </body>
