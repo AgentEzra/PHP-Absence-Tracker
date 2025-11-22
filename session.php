@@ -17,7 +17,7 @@ function isUser() {
 
 function redirectIfNotLoggedIn() {
     if (!isLoggedIn()) {
-        header("Location: index.php");
+        header("Location: index.php"); //this is login pages
         exit();
     }
 }
@@ -29,7 +29,6 @@ function redirectIfNotAdmin() {
     }
 }
 
-// Redirect to dashboard after login (update your login.php)
 function redirectAfterLogin() {
     header("Location: dashboard.php");
     exit();
