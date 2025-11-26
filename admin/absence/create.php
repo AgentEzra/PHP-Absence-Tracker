@@ -1,4 +1,4 @@
-<?php
+<!-- <?php
 include '../config/connect.php';
 
 $userID = '';
@@ -79,4 +79,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
 
     <a href="./read.php">Back To Main?</a>
 </body>
-</html>
+</html> -->

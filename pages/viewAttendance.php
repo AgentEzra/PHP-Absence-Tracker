@@ -1,5 +1,11 @@
 <?php
+$credsId = $_SESSION['credsId'];
 
+$sql = "SELECT waktu, keterangan, kelas, jurusan FROM absence_table_abs 
+        WHERE credsId = ? ORDER BY waktu DESC";
+$stmt = $connect->prepare($sql);
+$stmt->execute([$credsId]);
+$results = $stmt->fetchAll();
 ?>
 
 <!DOCTYPE html>

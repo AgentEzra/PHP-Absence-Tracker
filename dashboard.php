@@ -2,7 +2,7 @@
 include './admin/config/connect.php';
 include 'session.php';
 
-redirectIfNotLoggedIn()
+redirectIfNotLoggedIn();
 ?>
 
 <!DOCTYPE html>

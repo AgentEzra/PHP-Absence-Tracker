@@ -1,4 +1,4 @@
-<?php
+<!-- <?php
 include '../config/connect.php';
 
 $query = "SELECT * FROM absence_table_abs";
@@ -44,4 +44,4 @@ $result = mysqli_query($connect, $query);
         <?php endwhile; ?>
     </table>
 </body>
-</html>
+</html> -->

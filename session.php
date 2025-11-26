@@ -3,7 +3,7 @@ session_start();
 
 function isLoggedIn() {
     return 
-    isset($_SESSION['user_id']);
+    isset($_SESSION['credsId']);
     isset($_SESSION['username']);
 }
 
@@ -17,20 +17,20 @@ function isUser() {
 
 function redirectIfNotLoggedIn() {
     if (!isLoggedIn()) {
-        header("Location: index.php"); //this is login pages
+        header("Location: index.php"); // this is login pages
         exit();
     }
 }
 
 function redirectIfNotAdmin() {
     if (!isAdmin()) {
-        header("Location: dashboard.php");
+        header("Location: dashboard.php"); // protect admin pages
         exit();
     }
 }
 
 function redirectAfterLogin() {
-    header("Location: dashboard.php");
+    header("Location: dashboard.php"); // i have no idea when this will be used
     exit();
 }
 ?>

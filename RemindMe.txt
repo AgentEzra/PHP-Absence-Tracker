@@ -1,0 +1,5 @@
+* 26/11/2025
+requestAbsence.php, im thinking about adding username but im not sure about it, but ai said dont
+add new column to table absence_table_abs, but rather just join table via credsId
+
+-----

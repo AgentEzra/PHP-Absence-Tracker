@@ -27,8 +27,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
         $result = mysqli_stmt_get_result($stmt);
 
         if ($row = mysqli_fetch_assoc($result)) {
-            $_SESSION['user_id'] = $row['id']; // Make sure to set user_id
-            $_SESSION['username'] = $row['username'];
+
+            //Get user SESSION
+            $_SESSION['username'] = $row['username']; // For dashboardname
+            $_SESSION['credsId'] = $row['id']; // Rest for absence
+            $_SESSION['kelas'] = $row['kelas'];
+            $_SESSION['jurusan'] = $row['jurusan'];
             $_SESSION['role'] = $row['role'];
 
             $success = 'Login Berhasil';
