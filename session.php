@@ -2,9 +2,8 @@
 session_start();
 
 function isLoggedIn() {
-    return 
-    isset($_SESSION['credsId']);
-    isset($_SESSION['username']);
+    return isset($_SESSION['username']) && // check if session already exist
+        isset($_SESSION['credsId']);
 }
 
 function isAdmin() {

@@ -81,7 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
 </nav>
 
 <h1>Request Absence</h1>
-<h1><?=$_SESSION['kelas'] ?></h1>
+<h1><?=$_SESSION['credsId'] ?></h1>
 <h1><?=$_SESSION['jurusan'] ?></h1> 
 
     <form method="post"> 
@@ -95,18 +95,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
         <!-- Make sure jurusan value in db was capital -Ezra -->
         <label for="jurusan">Major</label> 
         <select name="jurusan" id="jurusan">
-          <option value="rpl" <?= isSelected($_SESSION['jurusan'], 'RPL') ?>>RPL</option> 
-          <option value="dkv" <?= isSelected($_SESSION['jurusan'], 'DKV') ?>>DKV</option>
-          <option value="akl" <?= isSelected($_SESSION['jurusan'], 'AKL') ?>>AKL</option>
-          <option value="mp" <?= isSelected($_SESSION['jurusan'], 'MP') ?>>MP</option>
-          <option value="br" <?= isSelected($_SESSION['jurusan'], 'BR') ?>>BR</option>
+          <option value="RPL" <?= isSelected($_SESSION['jurusan'], 'RPL') ?>>RPL</option> 
+          <option value="DKV" <?= isSelected($_SESSION['jurusan'], 'DKV') ?>>DKV</option>
+          <option value="AKL" <?= isSelected($_SESSION['jurusan'], 'AKL') ?>>AKL</option>
+          <option value="MP" <?= isSelected($_SESSION['jurusan'], 'MP') ?>>MP</option>
+          <option value="BR" <?= isSelected($_SESSION['jurusan'], 'BR') ?>>BR</option>
         </select>
 
         <label for="keterangan">Status</label>
         <select name="keterangan" id="keterangan">
-          <option value="Hadir">Present</option> 
-          <option value="Sakit">Sick</option>
-          <option value="Izin">Busy</option>
+          <option value="present">Present</option> 
+          <option value="sick">Sick</option>
+          <option value="busy">Busy</option>
         </select>
 
         <button>Add Absence</button>

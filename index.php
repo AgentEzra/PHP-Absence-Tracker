@@ -46,7 +46,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     } else {
         $error = 'Terjadi suatu kesalahan pada query';
     }
-    exit();
 }
 ?>
 
@@ -61,6 +60,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
 <body>
     <div class="auth-box">
     <h1>Login</h1>
+
+    <?php if(!empty($error)): ?>
+        <?= htmlspecialchars($error) ?>
+    <?php endif; ?>
 
     <form method="post">
         <div class="auth-part">

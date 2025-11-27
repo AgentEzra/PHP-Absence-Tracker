@@ -3,3 +3,12 @@ requestAbsence.php, im thinking about adding username but im not sure about it, 
 add new column to table absence_table_abs, but rather just join table via credsId
 
 -----
+
+* 27/11/2025
+i think requestAbsence.php form only need kelas, jurusan, status, no need username nor name 
+because the $_SESSION already cover the username and name and it was more valid because its straight
+from the login data and also keep the absence_table_abs cleaner
+
+and on viewAttendance.php, it will join table abs and creds and it will pull name
+
+-----
