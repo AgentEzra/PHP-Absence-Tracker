@@ -5,7 +5,8 @@ CREATE TABLE absence_table_creds(
     password VARCHAR(255) NOT NULL,
     nama VARCHAR(50) NOT NULL,
     kelas VARCHAR(50) NOT NULL,
-    jurusan VARCHAR(50) NOT NULL
+    jurusan VARCHAR(50) NOT NULL,
+    role ENUM ('user', 'admin') DEFAULT 'user';
 );
 
 CREATE TABLE absence_table_abs (
