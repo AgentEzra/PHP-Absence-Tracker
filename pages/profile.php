@@ -3,6 +3,29 @@ include '../admin/config/connect.php';
 include '../session.php';
 
 redirectIfNotLoggedIn();
+
+$credsId = $_SESSION['credsId'];
+
+$sql = "SELECT t1.username, t1.nama, t1.kelas, t1.jurusan, t2.profImage, t2.alamat, t2.bio 
+    FROM absence_table_creds as t1 
+    LEFT JOIN user_profile as t2 ON t1.id = t2.credsId where t1.id = ?";
+$stmt = $connect->prepare($sql);
+$stmt->bind_param("i", $credsId);
+$stmt->execute();
+
+$result = $stmt->get_result();
+
+$results = [];
+while ($row = $result->fetch_assoc()) {
+    $results[] = $row;
+}
+
+$resultData = $results[0] ?? [];
+
+//check profile is empty or no
+$profile = !empty($resultData['profImage']) ? $resultData['profImage'] : "../image/default.webp";
+
+$stmt->close();
 ?>
 
 <!DOCTYPE html>
@@ -43,7 +66,7 @@ redirectIfNotLoggedIn();
             <ul class="navbar-nav navbar-nav-profile">
                 <li class="nav-item profile-dropdown">
                     <div class="dropdown-toggle" id="profileDropdown">
-                        <img src="../image/dias.jpg" alt="Profile" class="profile-img"> <?=$_SESSION['username']; ?>
+                        <img src="<?=$profile ?>" alt="Profile" class="profile-img"> <?=$_SESSION['username']; ?>
                     </div>
                     <ul class="dropdown-menu" id="dropdownMenu">
                         <li><a class="dropdown-item" href="./profile.php">Profile</a></li>
@@ -56,6 +79,19 @@ redirectIfNotLoggedIn();
         </div>
     </div>
 </nav>
+<div class="container">
+    <div class="box-absence">
+        
+        <img src="<?=$profile ?>" alt="Profile">
+        <input type="text" placeholder="Username" value="<?=$resultData['username'] ?? ''; ?>">
+        <input type="text" placeholder="Name" value="<?=$resultData['nama'] ?? ''; ?>">
+        <input type="text" placeholder="Grade" value="<?=$resultData['kelas'] ?? ''; ?>">
+        <input type="text" placeholder="Major" value="<?=$resultData['jurusan'] ?? ''; ?>">
+        <input type="text" placeholder="Address" value="<?=$resultData['alamat'] ?? ''; ?>">
+        <input type="text" placeholder="Bio" value="<?=$resultData['bio'] ?? ''; ?>">
+        
+    </div>
+</div>
 
 <!-- Custom JavaScript for dropdown and mobile menu -->
     <script>

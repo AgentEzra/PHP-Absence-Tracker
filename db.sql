@@ -18,3 +18,12 @@ CREATE TABLE absence_table_abs (
     keterangan VARCHAR(50) NOT NULL,
     FOREIGN KEY (credsId) REFERENCES absence_table_creds(id)
 );
+
+CREATE TABLE user_profile (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    credsId INT,
+    profImage VARCHAR(50),
+    alamat VARCHAR(50),
+    bio VARCHAR(50),
+    FOREIGN KEY (credsId) REFERENCES absence_table_creds(id)
+);
