@@ -90,6 +90,7 @@ $stmt->close();
         <input type="text" placeholder="Address" value="<?=$resultData['alamat'] ?? ''; ?>">
         <input type="text" placeholder="Bio" value="<?=$resultData['bio'] ?? ''; ?>">
         
+        <button>Submit</button>
     </div>
 </div>
 

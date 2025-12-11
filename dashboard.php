@@ -3,6 +3,8 @@ include './admin/config/connect.php';
 include 'session.php';
 
 redirectIfNotLoggedIn();
+
+$profile = !empty($resultData['profImage']) ? $resultData['profImage'] : "../image/default.webp";
 ?>
 
 <!DOCTYPE html>
@@ -46,7 +48,7 @@ redirectIfNotLoggedIn();
             <ul class="navbar-nav navbar-nav-profile">
                 <li class="nav-item profile-dropdown">
                     <div class="dropdown-toggle" id="profileDropdown">
-                        <img src="./image/dias.jpg" alt="Profile" class="profile-img"> <?=$_SESSION['username']; ?>
+                        <img src="<?=$profile ?>" alt="Profile" class="profile-img"> <?=$_SESSION['username']; ?>
                     </div>
                     <ul class="dropdown-menu" id="dropdownMenu">
                         <li><a class="dropdown-item" href="./pages/profile.php">Profile</a></li>

@@ -18,6 +18,8 @@ $major = '';
 $waktu = '';
 $status = '';
 
+$profile = !empty($resultData['profImage']) ? $resultData['profImage'] : "../image/default.webp";
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     $credsId = $_SESSION['credsId'];
     $grade = $_POST['kelas'];
@@ -80,7 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
             <ul class="navbar-nav navbar-nav-profile">
                 <li class="nav-item profile-dropdown">
                     <div class="dropdown-toggle" id="profileDropdown">
-                        <img src="../image/dias.jpg" alt="Profile" class="profile-img"> <?=$_SESSION['username']; ?>
+                        <img src="<?=$profile ?>" alt="Profile" class="profile-img"> <?=$_SESSION['username']; ?>
                     </div>
                     <ul class="dropdown-menu" id="dropdownMenu">
                         <li><a class="dropdown-item" href="./profile.php">Profile</a></li>
