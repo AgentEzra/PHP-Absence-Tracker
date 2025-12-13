@@ -19,3 +19,11 @@ use left join, so it will throw all data from table creds and only matching data
 and also i think i want to add double data insert on register but i dont think that was the correct 
 logic so for now i think i will stick on emptying profile table and i will use query insert then
 update, rather than only insert like usually
+
+-----
+
+* 13/12/2025
+i think ill make another table for user profile and the logic is it will always update table creds 
+rather than insert cuz the data always exist cause by login, and for the profile table it will have
+2 query, insert and update, first thing is check whenever data exist, if exist then it will update
+and if the data not found then it will insert

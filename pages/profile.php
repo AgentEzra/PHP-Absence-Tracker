@@ -4,7 +4,52 @@ include '../session.php';
 
 redirectIfNotLoggedIn();
 
+$username = '';
+$name = '';
+$grade = '';
+$major = '';
+$address = '';
+$bio = '';
+
 $credsId = $_SESSION['credsId'];
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST'){
+    $username = $_POST['username'];
+    $name = $_POST['name'];
+    $grade = $_POST['grade'];
+    $major = $_POST['major'];
+    $address = $_POST['address'];
+    $bio = $_POST['bio'];
+
+    //query update creds
+    $queryUpdateCreds = "UPDATE absence_table_creds SET 
+        username = '$username', nama = '$name', kelas = '$grade', jurusan = '$major' WHERE id = '$credsId'";
+    
+    //query insert profile
+    $queryUpdateProfile = "UPDATE user_profile SET
+        alamat = '$address', bio = '$bio' WHERE credsId = '$credsId'";
+
+    //query update profile
+    $queryInsertProfile = "INSERT INTO user_profile(credsId, alamat, bio) VALUES('$credsId', '$address', '$bio')";
+
+    //query check data by select
+    $queryFetchProfile = "SELECT * FROM user_profile WHERE credsId = '$credsId'";
+    mysqli_query($connect, $queryUpdateCreds);
+
+
+
+    $result = mysqli_query($connect, $queryFetchProfile);
+
+    $checkProfile = mysqli_fetch_assoc($result);
+
+    if (!empty($checkProfile)){
+        $result = mysqli_query($connect, $queryUpdateProfile);
+    }
+    else {
+        $result = mysqli_query($connect, $queryInsertProfile);
+    }
+}
+
 
 $sql = "SELECT t1.username, t1.nama, t1.kelas, t1.jurusan, t2.profImage, t2.alamat, t2.bio 
     FROM absence_table_creds as t1 
@@ -81,16 +126,16 @@ $stmt->close();
 </nav>
 <div class="container">
     <div class="box-absence">
-        
-        <img src="<?=$profile ?>" alt="Profile">
-        <input type="text" placeholder="Username" value="<?=$resultData['username'] ?? ''; ?>">
-        <input type="text" placeholder="Name" value="<?=$resultData['nama'] ?? ''; ?>">
-        <input type="text" placeholder="Grade" value="<?=$resultData['kelas'] ?? ''; ?>">
-        <input type="text" placeholder="Major" value="<?=$resultData['jurusan'] ?? ''; ?>">
-        <input type="text" placeholder="Address" value="<?=$resultData['alamat'] ?? ''; ?>">
-        <input type="text" placeholder="Bio" value="<?=$resultData['bio'] ?? ''; ?>">
-        
-        <button>Submit</button>
+        <form method="post">
+            <img src="<?=$profile ?>" alt="Profile">
+            <input type="text" name="username" placeholder="Username" value="<?=$resultData['username'] ?? ''; ?>">
+            <input type="text" name="name" placeholder="Name" value="<?=$resultData['nama'] ?? ''; ?>">
+            <input type="text" name="grade" placeholder="Grade" value="<?=$resultData['kelas'] ?? ''; ?>">
+            <input type="text" name="major" placeholder="Major" value="<?=$resultData['jurusan'] ?? ''; ?>">
+            <input type="text" name="address" placeholder="Address" value="<?=$resultData['alamat'] ?? ''; ?>">
+            <input type="text" name="bio" placeholder="Bio" value="<?=$resultData['bio'] ?? ''; ?>">
+            <button>Submit</button>
+        </form>
     </div>
 </div>
 

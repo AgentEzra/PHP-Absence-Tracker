@@ -4,7 +4,7 @@ include 'session.php';
 
 redirectIfNotLoggedIn();
 
-$profile = !empty($resultData['profImage']) ? $resultData['profImage'] : "../image/default.webp";
+$profile = !empty($resultData['profImage']) ? $resultData['profImage'] : "./image/default.webp";
 ?>
 
 <!DOCTYPE html>
