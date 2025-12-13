@@ -27,3 +27,11 @@ i think ill make another table for user profile and the logic is it will always 
 rather than insert cuz the data always exist cause by login, and for the profile table it will have
 2 query, insert and update, first thing is check whenever data exist, if exist then it will update
 and if the data not found then it will insert
+
+-----
+
+* 13/12/2025
+for the edit profile image i think ill keep it by default deafault.jpg, and if user decide to edit
+their pp then it will update table profile where id = session credsId and if somehow user edit their
+PP first then ill make the condition to insert, rather than update, and also im planning to format 
+the image name into something like id + date maybe?

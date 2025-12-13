@@ -8,6 +8,7 @@ $username = '';
 $name = '';
 $grade = '';
 $major = '';
+$ppImg = '';
 $address = '';
 $bio = '';
 
@@ -20,6 +21,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     $major = $_POST['major'];
     $address = $_POST['address'];
     $bio = $_POST['bio'];
+
+    if (isset($_FILES['profile-img']) && $_FILES['profile-img']['error'] == 0){
+        $file = $_FILES['profile-img'];
+
+        $extension = pathinfo($file['name'], PATHINFO_EXTENSION);
+        $newFileName = $credsId . '-' . date('ymd') . '.' . $extension;
+
+        $uploadPath = '../image/' . $newFileName;
+
+        if (move_uploaded_file($file['tmp_name'], $uploadPath)){
+            $imageFileName = $newFileName;
+
+            $checkImageQuery = "SELECT profImage FROM user_profile where credsId = '$credsId'";
+            $result = mysqli_query($connect, $checkImageQuery);
+
+            if (mysqli_num_rows($result) > 0){
+                $updateImageQuery = "UPDATE user_profile SET profImage = '$imageFileName' WHERE credsId = '$credsId'";
+                $result = mysqli_query($connect, $updateImageQuery);
+            }
+            else {
+                $insertImageQuery = "INSERT INTO user_profile(credsId, profImage) VALUES ('$credsId', '$imageFileName')";
+                $result = mysqli_query($connect, $insertImageQuery);
+            }
+        }
+    }  
 
     //query update creds
     $queryUpdateCreds = "UPDATE absence_table_creds SET 
@@ -48,6 +74,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     else {
         $result = mysqli_query($connect, $queryInsertProfile);
     }
+
+    // Redirect to refresh page and show updated image
+    header("Location: " . $_SERVER['PHP_SELF']);
+    exit();
 }
 
 
@@ -68,7 +98,7 @@ while ($row = $result->fetch_assoc()) {
 $resultData = $results[0] ?? [];
 
 //check profile is empty or no
-$profile = !empty($resultData['profImage']) ? $resultData['profImage'] : "../image/default.webp";
+$profile = !empty($resultData['profImage']) ? "../image/" . $resultData['profImage'] : "../image/default.webp";
 
 $stmt->close();
 ?>
@@ -126,8 +156,11 @@ $stmt->close();
 </nav>
 <div class="container">
     <div class="box-absence">
-        <form method="post">
-            <img src="<?=$profile ?>" alt="Profile">
+        <form method="post" enctype="multipart/form-data">
+            <img src="<?=$profile ?>" alt="Profile" style="width: 300px; height: 300px; border-radius: 200px">
+            <label for="profile-img">Edit Profile Image</label>
+            <input type="file" id="profile-img" name="profile-img" accept="image/*">
+
             <input type="text" name="username" placeholder="Username" value="<?=$resultData['username'] ?? ''; ?>">
             <input type="text" name="name" placeholder="Name" value="<?=$resultData['nama'] ?? ''; ?>">
             <input type="text" name="grade" placeholder="Grade" value="<?=$resultData['kelas'] ?? ''; ?>">
