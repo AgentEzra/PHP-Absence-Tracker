@@ -6,13 +6,21 @@ redirectIfNotLoggedIn();
 
 $credsId = $_SESSION['credsId'];
 
+// profile img
+$sqlProfile = "SELECT profImage FROM user_profile WHERE credsId = ?";
+$stmtProfile = $connect->prepare($sqlProfile);
+$stmtProfile->bind_param("i", $credsId);
+$stmtProfile->execute();
+$resultProfile = $stmtProfile->get_result();
+$resultProfileData = $resultProfile->fetch_assoc();
+
+// absence
 $sql = "SELECT t1.nama, t2.kelas, t2.jurusan, t2.waktu, t2.keterangan 
     FROM absence_table_creds as t1 
     INNER JOIN absence_table_abs as t2 ON t1.id = t2.credsId where t1.id = ?";
 $stmt = $connect->prepare($sql);
 $stmt->bind_param("i", $credsId);
 $stmt->execute();
-
 $result = $stmt->get_result();
 
 $results = [];
@@ -20,8 +28,10 @@ while ($row = $result->fetch_assoc()) {
     $results[] = $row;
 }
 
-$profile = !empty($resultData['profImage']) ? $resultData['profImage'] : "../image/default.webp";
+// FIXED: Add proper path to profile image
+$profile = !empty($resultProfileData['profImage']) ? "../image/" . $resultProfileData['profImage'] : "../image/default.webp";
 
+$stmtProfile->close();
 $stmt->close();
 ?>
 
@@ -63,7 +73,8 @@ $stmt->close();
             <ul class="navbar-nav navbar-nav-profile">
                 <li class="nav-item profile-dropdown">
                     <div class="dropdown-toggle" id="profileDropdown">
-                        <img src="<?=$profile ?>" alt="Profile" class="profile-img"> <?=$_SESSION['username']; ?>
+                        <img src="<?= htmlspecialchars($profile) ?>" alt="Profile" class="profile-img"> 
+                        <?= htmlspecialchars($_SESSION['username']); ?>
                     </div>
                     <ul class="dropdown-menu" id="dropdownMenu">
                         <li><a class="dropdown-item" href="./profile.php">Profile</a></li>
@@ -94,12 +105,12 @@ $stmt->close();
                 <?php $id = 0; ?>
                 <?php foreach ($results as $resultsData): $id++ ?>
                 <tr>
-                    <td><?=$id; ?></td>
-                    <td><?=$resultsData['nama']; ?></td>
-                    <td><?=$resultsData['kelas']; ?></td>
-                    <td><?=$resultsData['jurusan']; ?></td>
-                    <td><?=$resultsData['waktu']; ?></td>
-                    <td><?=$resultsData['keterangan']; ?></td>
+                    <td><?= $id; ?></td>
+                    <td><?= htmlspecialchars($resultsData['nama']); ?></td>
+                    <td><?= htmlspecialchars($resultsData['kelas']); ?></td>
+                    <td><?= htmlspecialchars($resultsData['jurusan']); ?></td>
+                    <td><?= htmlspecialchars($resultsData['waktu']); ?></td>
+                    <td><?= htmlspecialchars($resultsData['keterangan']); ?></td>
                 </tr>
                 <?php endforeach; ?>
             </tbody>
@@ -141,4 +152,5 @@ $stmt->close();
             }
         });
     </script>
+</body>
 </html>

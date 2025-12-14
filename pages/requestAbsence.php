@@ -18,7 +18,13 @@ $major = '';
 $waktu = '';
 $status = '';
 
-$profile = !empty($resultData['profImage']) ? $resultData['profImage'] : "../image/default.webp";
+$credsId = $_SESSION['credsId'];
+
+$sqlProfile = "SELECT profImage FROM user_profile WHERE credsId = '$credsId'";
+$resultProfile = mysqli_query($connect, $sqlProfile);
+$resultProfileData = mysqli_fetch_assoc($resultProfile);
+
+$profile = !empty($resultProfileData['profImage']) ? "../image/" .  $resultProfileData['profImage'] : "../image/default.webp";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     $credsId = $_SESSION['credsId'];

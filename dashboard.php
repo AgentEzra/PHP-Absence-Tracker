@@ -4,7 +4,26 @@ include 'session.php';
 
 redirectIfNotLoggedIn();
 
-$profile = !empty($resultData['profImage']) ? $resultData['profImage'] : "./image/default.webp";
+$credsId = $_SESSION['credsId'];
+
+$sql = "SELECT profImage FROM user_profile WHERE credsId = ?";
+$stmt = $connect->prepare($sql);
+$stmt->bind_param("i", $credsId);
+$stmt->execute();
+
+$result = $stmt->get_result();
+
+$results = [];
+while ($row = $result->fetch_assoc()) {
+    $results[] = $row;
+}
+
+$resultData = $results[0] ?? [];
+
+//check profile is empty or no
+$profile = !empty($resultData['profImage']) ? "./image/" . $resultData['profImage'] : "./image/default.webp";
+
+$stmt->close();
 ?>
 
 <!DOCTYPE html>
