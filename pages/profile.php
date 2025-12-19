@@ -110,6 +110,7 @@ $stmt->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Main Page</title>
     <link rel="stylesheet" href="../styleDashboard.css">
+    <link rel="stylesheet" href="./styleProfile.css">
 </head>
 <body>
   <nav class="navbar">
@@ -155,20 +156,27 @@ $stmt->close();
     </div>
 </nav>
 <div class="container">
-    <div class="box-absence">
-        <form method="post" enctype="multipart/form-data">
-            <img src="<?=$profile ?>" alt="Profile" style="width: 300px; height: 300px; border-radius: 200px">
-            <label for="profile-img">Edit Profile Image</label>
-            <input type="file" id="profile-img" name="profile-img" accept="image/*">
+    <div class="box-profile">
+        <div class="absence-rows">
+            <form method="post" enctype="multipart/form-data">
+                <div class="profile-image">
+                    <img src="<?=$profile ?>" alt="Profile" style="width: 300px; height: 300px; border-radius: 200px">
+                </div>
 
-            <input type="text" name="username" placeholder="Username" value="<?=$resultData['username'] ?? ''; ?>">
-            <input type="text" name="name" placeholder="Name" value="<?=$resultData['nama'] ?? ''; ?>">
-            <input type="text" name="grade" placeholder="Grade" value="<?=$resultData['kelas'] ?? ''; ?>">
-            <input type="text" name="major" placeholder="Major" value="<?=$resultData['jurusan'] ?? ''; ?>">
-            <input type="text" name="address" placeholder="Address" value="<?=$resultData['alamat'] ?? ''; ?>">
-            <input type="text" name="bio" placeholder="Bio" value="<?=$resultData['bio'] ?? ''; ?>">
-            <button>Submit</button>
-        </form>
+                <div class="absence-part">
+                    <label for="profile-img" class="label-file">Edit Profile Image</label>
+                    <input type="file" id="profile-img" name="profile-img" accept="image/*" class="file-input">
+        
+                    <input type="text" name="username" placeholder="Username" value="<?=$resultData['username'] ?? ''; ?>">
+                    <input type="text" name="name" placeholder="Name" value="<?=$resultData['nama'] ?? ''; ?>">
+                    <input type="text" name="grade" placeholder="Grade" value="<?=$resultData['kelas'] ?? ''; ?>">
+                    <input type="text" name="major" placeholder="Major" value="<?=$resultData['jurusan'] ?? ''; ?>">
+                    <input type="text" name="address" placeholder="Address" value="<?=$resultData['alamat'] ?? ''; ?>">
+                    <textarea type="text" name="bio" placeholder="Bio" value="<?=$resultData['bio'] ?? ''; ?>"></textarea>
+                    <button>Submit</button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 

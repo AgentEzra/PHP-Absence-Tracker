@@ -1,0 +1,112 @@
+/* Profile Form Styles - For Existing HTML */
+.container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.box-profile {
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+    margin: 20px auto;
+    padding: 2.5rem;
+    background: rgba(255, 255, 255, 0.95);
+    max-width: 450px;
+    width: 90%;
+    border-radius: 10px;
+}
+
+.profile-box {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 20px;
+    padding: 2px;
+    margin-bottom: 2rem;
+}
+
+.absence-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* Profile Image Section */
+.profile-image {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 2px solid rgba(102, 126, 234, 0.1);
+}
+
+.profile-image img {
+    width: 200px !important;
+    height: 200px !important;
+    border-radius: 50% !important;
+    border: 8px solid white;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+    object-fit: cover;
+}
+
+.profile-image img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+}
+
+.absence-part {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.absence-part label {
+    font-weight: 600;
+    color: #fff;
+    font-size: 0.95rem;
+    margin-left: 0.25rem;
+    display: block;
+    margin-bottom: 0.5rem;
+    margin-top: 15px;
+}
+
+.absence-part input {
+    padding: 0.5rem;
+    border: 2px solid rgba(23, 23, 23, 0.1);
+    border-radius: 10px;
+    background: #f8fafc;
+}
+
+input[name="address"] {
+    grid-column: 1 / -1;  
+    padding: 0.5rem;     
+    min-height: 60px;     
+    line-height: 1.6;     
+}
+
+textarea[name="bio"] {
+    grid-column: 1 / -1;  
+    padding: 0.5rem;     
+    min-height: 150px;    
+    line-height: 1.6;     
+    resize: vertical;     
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    width: 100%;
+    font-family: inherit;  
+    transition: all 0.3s ease;
+    background: #f8fafc;
+}   
+
+.file-input {
+    display: none;
+}
+
+.label-file {
+    max-width: 155px;
+    padding: 8px 16px;
+    background: rgb(99, 174, 224);
+    border-radius: 10px;
+    font-weight: 600;
+}
