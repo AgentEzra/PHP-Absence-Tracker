@@ -4,6 +4,7 @@ include 'session.php';
 
 redirectIfNotLoggedIn();
 
+$waktu = date('Y-m-d');
 $credsId = $_SESSION['credsId'];
 
 $sql = "SELECT profImage FROM user_profile WHERE credsId = ?";
@@ -38,7 +39,7 @@ $stmt->close();
     </style>
 </head>
 <body>
-    <nav class="navbar">
+<nav class="navbar">
     <div class="navbar-container">
         <a class="navbar-brand" href="index.php">Absence Tracker</a>
         
@@ -80,6 +81,30 @@ $stmt->close();
         </div>
     </div>
 </nav>
+
+<div class="container">
+    <div class="dashboard-part">
+        <h3>Hello <?=$_SESSION['username'] ?></h3>
+        <p><?=$waktu; ?></p>
+    </div>
+
+    <div class="dashboard-part">
+        <h3>You have absenced today, have a nice day!</h3>
+        <h3>You haven'th absence today, <a href="./pages/requestAbsence.php">Click here to absence</a></h3>
+    </div>
+
+    <div class="dashboard-chart">
+        <h3>chart here like total absence in monthly</h3>
+    </div>
+
+    <div class="dashboard-help">
+        <h3>Having a problem? <a href="#">let us know</a></h3>
+    </div>
+
+    <div class="footer">
+            <p>Attendance System © <?php echo date('Y'); ?>. All rights reserved.</p>
+        </div>
+</div>
 
     <!-- Custom JavaScript for dropdown and mobile menu -->
     <script>

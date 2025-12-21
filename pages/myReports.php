@@ -4,7 +4,17 @@ include '../session.php';
 
 redirectIfNotLoggedIn();
 
-$profile = !empty($resultData['profImage']) ? $resultData['profImage'] : "../image/default.webp";
+$credsId = $_SESSION['credsId'];
+
+// profile img
+$sqlProfile = "SELECT profImage FROM user_profile WHERE credsId = ?";
+$stmtProfile = $connect->prepare($sqlProfile);
+$stmtProfile->bind_param("i", $credsId);
+$stmtProfile->execute();
+$resultProfile = $stmtProfile->get_result();
+$resultProfileData = $resultProfile->fetch_assoc();
+
+$profile = !empty($resultProfileData['profImage']) ? "../image/" . $resultProfileData['profImage'] : "../image/default.webp";
 ?>
 
 <!DOCTYPE html>
@@ -58,6 +68,10 @@ $profile = !empty($resultData['profImage']) ? $resultData['profImage'] : "../ima
         </div>
     </div>
 </nav>
+
+<div class="container">
+    <h3></h3>
+</div>
 
 <!-- Custom JavaScript for dropdown and mobile menu -->
     <script>
