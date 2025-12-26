@@ -82,26 +82,27 @@ $stmt->close();
     </div>
 </nav>
 
-<div class="container">
+<div class="dashboard-container">
     <div class="dashboard-part">
-        <h3>Hello <?=$_SESSION['username'] ?></h3>
+        <img src="<?=$profile ?>" alt="Profile" style="max-width: 100px; max-height:100px; border-radius:100px;">
+        <h3>Hello <?=$_SESSION['username'] . "!"?></h3>
         <p><?=$waktu; ?></p>
     </div>
 
-    <div class="dashboard-part">
+    <div class="dashboard-notif">
         <h3>You have absenced today, have a nice day!</h3>
         <h3>You haven'th absence today, <a href="./pages/requestAbsence.php">Click here to absence</a></h3>
     </div>
 
     <div class="dashboard-chart">
-        <h3>chart here like total absence in monthly</h3>
+        <h3>dev cant make chart yet :D</h3>
     </div>
 
     <div class="dashboard-help">
         <h3>Having a problem? <a href="#">let us know</a></h3>
     </div>
 
-    <div class="footer">
+    <div class="dashboard-footer">
             <p>Attendance System © <?php echo date('Y'); ?>. All rights reserved.</p>
         </div>
 </div>
